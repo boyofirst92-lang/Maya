@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maya | Your money, made simple</title>
+    <meta name="description" content="A Maya-inspired mobile wallet dashboard for the Philippines." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="auth-shell" id="auth-shell">
+      <div class="auth-brand"><span class="brand-mark" aria-hidden="true">m</span><span class="brand-word">maya</span></div>
+      <div class="auth-layout">
+        <section class="auth-intro">
+          <p class="eyebrow">Your money, made simple</p>
+          <h1>Everything you need,<br /><em>all in one place.</em></h1>
+          <p class="auth-intro-copy">Send money, pay bills, and make every day a little easier with Maya.</p>
+          <div class="auth-orbit" aria-hidden="true"><span class="orbit-dot orbit-dot-one"></span><span class="orbit-dot orbit-dot-two"></span><span class="orbit-card">₱</span></div>
+        </section>
+        <section class="auth-panel" aria-live="polite">
+          <div class="auth-progress"><span class="progress-fill"></span></div>
+          <div class="auth-step" data-step="welcome">
+            <p class="eyebrow">Welcome to Maya</p><h2>Let’s get started.</h2><p class="auth-description">Log in to your account and pick up where you left off.</p>
+            <button class="primary-button auth-button" type="button" data-next="phone">Log in <span>→</span></button>
+            <p class="auth-footnote">New to Maya? <button type="button" class="inline-button" data-demo-message>Sign up</button></p>
+          </div>
+          <div class="auth-step" data-step="phone" hidden>
+            <button class="back-button" type="button" data-back="welcome">← Back</button><p class="eyebrow">Step 1 of 3</p><h2>Enter your mobile number</h2><p class="auth-description">We’ll use this to find your Maya account.</p>
+            <label class="field-label" for="login-phone">Mobile number</label><div class="phone-field"><span>+63</span><input id="login-phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="9XX XXX XXXX" maxlength="10" /></div>
+            <button class="primary-button auth-button" type="button" data-next="password">Continue <span>→</span></button><p class="auth-footnote">By continuing, you agree to Maya’s <button type="button" class="inline-button">Terms</button> and <button type="button" class="inline-button">Privacy Policy</button>.</p>
+          </div>
+          <div class="auth-step" data-step="password" hidden>
+            <button class="back-button" type="button" data-back="phone">← Back</button><p class="eyebrow">Step 2 of 3</p><h2>Enter your password</h2><p class="auth-description">Keep your account secure. Never share your password with anyone.</p>
+            <label class="field-label" for="login-password">Password</label><div class="password-field"><input id="login-password" type="password" autocomplete="current-password" placeholder="Enter password" /><button type="button" aria-label="Show password" data-toggle-password>Show</button></div>
+            <button class="forgot-button" type="button" data-demo-message>Forgot password?</button><button class="primary-button auth-button" type="button" data-next="otp">Continue <span>→</span></button>
+          </div>
+          <div class="auth-step" data-step="otp" hidden>
+            <button class="back-button" type="button" data-back="password">← Back</button><p class="eyebrow">Step 3 of 3</p><h2>Enter your one-time PIN</h2><p class="auth-description">We sent a 6-digit code to your mobile number ending in <strong data-phone-ending>••••</strong>.</p>
+            <div class="otp-fields" aria-label="One-time PIN"><input aria-label="Digit 1" inputmode="numeric" maxlength="1" /><input aria-label="Digit 2" inputmode="numeric" maxlength="1" /><input aria-label="Digit 3" inputmode="numeric" maxlength="1" /><input aria-label="Digit 4" inputmode="numeric" maxlength="1" /><input aria-label="Digit 5" inputmode="numeric" maxlength="1" /><input aria-label="Digit 6" inputmode="numeric" maxlength="1" /></div>
+            <button class="primary-button auth-button" type="button" data-finish>Verify and log in <span>→</span></button><p class="auth-footnote otp-note">Didn’t get the code? <button type="button" class="inline-button" data-resend>Resend code</button><span data-resend-status></span></p>
+          </div>
+          <div class="auth-step auth-success" data-step="success" hidden><div class="success-icon">✓</div><p class="eyebrow">You’re all set</p><h2>Welcome back, Juan.</h2><p class="auth-description">Your account is ready. Taking you to your wallet now.</p></div>
+          <p class="demo-note">Demo experience · No information is sent or saved</p>
+        </section>
+      </div>
+    </main>
+
+    <div class="app-shell" id="app-shell" hidden>
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Maya home">
+          <span class="brand-mark" aria-hidden="true">m</span>
+          <span class="brand-word">maya</span>
+        </a>
+        <nav class="side-nav">
+          <a class="nav-item active" href="#top"><span class="nav-icon">⌂</span><span>Home</span></a>
+          <a class="nav-item" href="#wallet"><span class="nav-icon">▣</span><span>Wallet</span></a>
+          <a class="nav-item" href="#activity"><span class="nav-icon">↕</span><span>Activity</span></a>
+          <a class="nav-item" href="#rewards"><span class="nav-icon">✦</span><span>Rewards</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+          <a class="nav-item" href="#help"><span class="nav-icon">?</span><span>Help center</span></a>
+          <button class="profile-button" type="button" aria-label="Open profile menu">
+            <span class="avatar">JD</span>
+            <span><strong>Juan Dela Cruz</strong><small>Personal account</small></span>
+            <span class="more">•••</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content" id="top">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Tuesday, September 22</p>
+            <h1>Good afternoon, Juan <span class="sun">✳</span></h1>
+          </div>
+          <div class="top-actions">
+            <button class="icon-button" type="button" aria-label="Notifications"><span class="notification-dot"></span>♧</button>
+            <button class="icon-button profile-mobile" type="button" aria-label="Open profile"><span class="avatar">JD</span></button>
+          </div>
+        </header>
+
+        <section class="hero-grid" aria-label="Account overview">
+          <article class="balance-card">
+            <div class="balance-top"><span>Available balance</span><button class="visibility-toggle" type="button" aria-label="Hide balance" data-hidden="false">◉</button></div>
+            <div class="balance-amount" data-balance="₱24,680.50">₱24,680.50</div>
+            <div class="balance-meta"><span>Maya Wallet <b>•••• 4821</b></span><span class="verified">✓ Verified</span></div>
+            <div class="card-wave" aria-hidden="true"></div>
+          </article>
+          <article class="promo-card" id="rewards">
+            <div class="promo-copy"><span class="promo-label">MAYA REWARDS</span><h2>Earn while you spend.</h2><p>Get points every time you use your Maya card.</p><button class="text-button" type="button">Explore rewards <span>↗</span></button></div>
+            <div class="reward-stamp" aria-hidden="true"><span>✦</span><small>POINTS</small></div>
+          </article>
+        </section>
+
+        <section class="quick-actions" id="wallet" aria-labelledby="quick-actions-title">
+          <div class="section-heading"><h2 id="quick-actions-title">What do you want to do?</h2><span class="secure-note">🔒 Secure by Maya</span></div>
+          <div class="action-grid">
+            <button class="action-card" type="button" data-modal="send"><span class="action-icon send-icon">↗</span><span>Send money</span><small>To a Maya user or bank</small></button>
+            <button class="action-card" type="button" data-modal="add"><span class="action-icon add-icon">＋</span><span>Add money</span><small>Top up your wallet</small></button>
+            <button class="action-card" type="button" data-modal="scan"><span class="action-icon scan-icon">⌗</span><span>Scan to pay</span><small>Pay at any QR store</small></button>
+            <button class="action-card" type="button" data-modal="bills"><span class="action-icon bill-icon">▤</span><span>Pay bills</span><small>Keep things settled</small></button>
+          </div>
+        </section>
+
+        <section class="content-grid" id="activity">
+          <div class="activity-panel">
+            <div class="section-heading"><div><h2>Recent activity</h2><p class="section-subtitle">Your latest wallet movements</p></div><button class="link-button" type="button">See all <span>→</span></button></div>
+            <div class="transactions">
+              <div class="transaction"><span class="transaction-icon violet">▰</span><span class="transaction-info"><strong>GrabFood</strong><small>Today, 12:42 PM · Food &amp; dining</small></span><span class="transaction-value negative">− ₱385.00</span></div>
+              <div class="transaction"><span class="transaction-icon green">↙</span><span class="transaction-info"><strong>Received from Maria</strong><small>Today, 10:18 AM · Maya user</small></span><span class="transaction-value positive">+ ₱1,500.00</span></div>
+              <div class="transaction"><span class="transaction-icon blue">◒</span><span class="transaction-info"><strong>Netflix.com</strong><small>Yesterday, 8:00 AM · Subscriptions</small></span><span class="transaction-value negative">− ₱549.00</span></div>
+              <div class="transaction"><span class="transaction-icon yellow">⚡</span><span class="transaction-info"><strong>Wallet top up</strong><small>Sep 20, 4:30 PM · BPI •• 0912</small></span><span class="transaction-value positive">+ ₱5,000.00</span></div>
+            </div>
+          </div>
+          <aside class="side-panel">
+            <div class="section-heading"><div><h2>Your Maya cards</h2><p class="section-subtitle">Spend with confidence</p></div><button class="round-button" type="button" aria-label="Add a card">＋</button></div>
+            <div class="mini-card"><div class="mini-card-top"><span class="brand-word">maya</span><span>VISA</span></div><span class="card-number">•••• 4821</span><span class="card-name">JUAN DELA CRUZ</span></div>
+            <div class="card-footer"><span>Physical card</span><button class="link-button" type="button">Manage →</button></div>
+            <div class="tip-box"><span>✦</span><div><strong>Small wins add up</strong><p>You have earned <b>240 points</b> this month.</p></div></div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a class="mobile-nav-item active" href="#top"><span>⌂</span>Home</a><a class="mobile-nav-item" href="#wallet"><span>▣</span>Wallet</a><a class="mobile-nav-item" href="#activity"><span>↕</span>Activity</a><a class="mobile-nav-item" href="#rewards"><span>✦</span>Rewards</a>
+    </nav>
+
+    <div class="modal-backdrop" data-modal-backdrop hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" type="button" aria-label="Close">×</button>
+        <div class="modal-icon">↗</div><p class="eyebrow">MAYA WALLET</p><h2 id="modal-title">Send money</h2><p class="modal-description">Move money instantly to another Maya user or a bank account.</p>
+        <label class="field-label" for="recipient">Recipient</label><input id="recipient" class="field" type="text" placeholder="Mobile number or bank account" />
+        <label class="field-label" for="amount">Amount</label><div class="amount-field"><span>₱</span><input id="amount" type="number" placeholder="0.00" /></div>
+        <button class="primary-button" type="button" data-confirm>Continue <span>→</span></button>
+      </section>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
