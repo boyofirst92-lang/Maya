@@ -1,99 +1,74 @@
-const authShell = document.querySelector('#auth-shell');
-const appShell = document.querySelector('#app-shell');
-const authSteps = document.querySelectorAll('.auth-step');
-const progressFill = document.querySelector('.progress-fill');
-const phoneInput = document.querySelector('#login-phone');
-const phoneEnding = document.querySelector('[data-phone-ending]');
+const steps = [...document.querySelectorAll('.step')];
+const progress = document.querySelector('.progress-fill');
+const stepCount = document.querySelector('[data-step-count]');
+const stepOrder = ['welcome', 'loan', 'details', 'phone', 'otp', 'verified', 'success'];
 
-function showAuthStep(stepName) {
-  authSteps.forEach((step) => { step.hidden = step.dataset.step !== stepName; });
-  const stepIndex = ['welcome', 'phone', 'password', 'otp', 'success'].indexOf(stepName);
-  progressFill.style.width = `${Math.max(12, stepIndex * 25)}%`;
+function showStep(name) {
+  steps.forEach((step) => { step.hidden = step.dataset.step !== name; });
+  const index = stepOrder.indexOf(name);
+  const progressIndex = Math.min(index, 5);
+  progress.style.width = `${Math.max(8, (progressIndex / 5) * 100)}%`;
+  stepCount.textContent = name === 'success' ? 'Application complete' : `Step ${Math.min(index + 1, 5)} of 5`;
+  const active = document.querySelector(`[data-step="${name}"]`);
+  active?.querySelector('input, select, button:not(.back-button)')?.focus();
 }
 
-document.querySelectorAll('[data-next]').forEach((button) => {
-  button.addEventListener('click', () => {
-    if (button.dataset.next === 'password' && phoneInput.value.replace(/\D/g, '').length < 9) {
-      phoneInput.classList.add('field-error');
-      phoneInput.focus();
-      return;
-    }
-    phoneInput.classList.remove('field-error');
-    showAuthStep(button.dataset.next);
-    if (button.dataset.next === 'otp') phoneEnding.textContent = phoneInput.value.slice(-4) || '••••';
-  });
-});
+function goTo(button, next) {
+  const current = button.closest('.step')?.dataset.step;
+  if (current === 'details' && !validateDetails()) return;
+  if (current === 'phone' && !validatePhone()) return;
+  showStep(next);
+}
 
-document.querySelectorAll('[data-back]').forEach((button) => button.addEventListener('click', () => showAuthStep(button.dataset.back)));
-document.querySelector('[data-toggle-password]').addEventListener('click', (event) => {
-  const input = document.querySelector('#login-password');
-  input.type = input.type === 'password' ? 'text' : 'password';
-  event.currentTarget.textContent = input.type === 'password' ? 'Show' : 'Hide';
-});
+document.querySelectorAll('[data-next]').forEach((button) => button.addEventListener('click', () => goTo(button, button.dataset.next)));
+document.querySelectorAll('[data-back]').forEach((button) => button.addEventListener('click', () => showStep(button.dataset.back)));
+
+const amountInput = document.querySelector('#loan-amount');
+const amountValue = document.querySelector('#amount-value');
+const termInput = document.querySelector('#loan-term');
+const monthlyPayment = document.querySelector('#monthly-payment');
+const peso = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 2 });
+function updateLoanEstimate() {
+  const amount = Number(amountInput.value);
+  const months = Number(termInput.value);
+  const total = amount * (1 + (0.05 * months / 12));
+  amountValue.textContent = peso.format(amount);
+  monthlyPayment.textContent = peso.format(total / months);
+  amountInput.style.setProperty('--range-progress', `${((amount - 10000) / 490000) * 100}%`);
+}
+amountInput.addEventListener('input', updateLoanEstimate);
+termInput.addEventListener('change', updateLoanEstimate);
+updateLoanEstimate();
+
+function validateDetails() {
+  const required = ['#first-name', '#last-name', '#birth-date', '#loan-purpose', '#monthly-income'];
+  const missing = required.some((selector) => !document.querySelector(selector).value.trim());
+  const error = document.querySelector('[data-form-error]');
+  error.textContent = missing ? 'Please complete all fields before continuing.' : '';
+  required.forEach((selector) => document.querySelector(selector).classList.toggle('field-error', !document.querySelector(selector).value.trim()));
+  return !missing;
+}
+function validatePhone() {
+  const input = document.querySelector('#mobile-number');
+  const valid = input.value.replace(/\D/g, '').length === 10;
+  document.querySelector('[data-phone-error]').textContent = valid ? '' : 'Enter a valid 10-digit Philippine mobile number.';
+  input.classList.toggle('field-error', !valid);
+  return valid;
+}
+
 document.querySelectorAll('.otp-fields input').forEach((input, index, fields) => input.addEventListener('input', () => {
-  input.value = input.value.replace(/\D/g, '');
+  input.value = input.value.replace(/\D/g, '').slice(0, 1);
   if (input.value && fields[index + 1]) fields[index + 1].focus();
 }));
 document.querySelector('[data-finish]').addEventListener('click', () => {
-  showAuthStep('success');
-  setTimeout(() => { authShell.hidden = true; appShell.hidden = false; }, 1100);
+  const digits = [...document.querySelectorAll('.otp-fields input')];
+  const valid = digits.every((input) => input.value);
+  document.querySelector('[data-otp-error]').textContent = valid ? '' : 'Enter all 6 digits of your one-time PIN.';
+  if (valid) showStep('verified');
 });
 document.querySelector('[data-resend]').addEventListener('click', (event) => {
-  document.querySelector('[data-resend-status]').textContent = ' Code resent.';
+  document.querySelector('[data-resend-status]').textContent = ' PIN resent.';
   event.currentTarget.disabled = true;
-  setTimeout(() => { event.currentTarget.disabled = false; }, 3000);
+  setTimeout(() => { event.currentTarget.disabled = false; document.querySelector('[data-resend-status]').textContent = ''; }, 3000);
 });
-document.querySelectorAll('[data-demo-message]').forEach((button) => button.addEventListener('click', () => {
-  const note = document.querySelector('.demo-note');
-  note.textContent = 'This is a demo flow. Sign up and recovery are not connected.';
-  setTimeout(() => { note.textContent = 'Demo experience · No information is sent or saved'; }, 2600);
-}));
-
-const backdrop = document.querySelector('[data-modal-backdrop]');
-const modalTitle = document.querySelector('#modal-title');
-const modalIcon = document.querySelector('.modal-icon');
-const recipientField = document.querySelector('#recipient');
-const amountField = document.querySelector('#amount');
-
-const modalContent = {
-  send: { title: 'Send money', icon: '↗', description: 'Move money instantly to another Maya user or a bank account.', recipient: 'Mobile number or bank account' },
-  add: { title: 'Add money', icon: '＋', description: 'Top up your wallet from a linked bank or card.', recipient: 'Choose a source' },
-  scan: { title: 'Scan to pay', icon: '⌗', description: 'Scan a merchant QR code to pay securely with your Maya Wallet.', recipient: 'QR scanner ready' },
-  bills: { title: 'Pay bills', icon: '▤', description: 'Pay your bills in a few taps and keep your accounts up to date.', recipient: 'Search biller' }
-};
-
-function openModal(type) {
-  const content = modalContent[type];
-  modalTitle.textContent = content.title;
-  modalIcon.textContent = content.icon;
-  document.querySelector('.modal-description').textContent = content.description;
-  recipientField.placeholder = content.recipient;
-  recipientField.value = '';
-  amountField.value = '';
-  backdrop.hidden = false;
-  recipientField.focus();
-}
-
-document.querySelectorAll('[data-modal]').forEach((button) => {
-  button.addEventListener('click', () => openModal(button.dataset.modal));
-});
-
-document.querySelector('.modal-close').addEventListener('click', () => { backdrop.hidden = true; });
-backdrop.addEventListener('click', (event) => { if (event.target === backdrop) backdrop.hidden = true; });
-document.addEventListener('keydown', (event) => { if (event.key === 'Escape') backdrop.hidden = true; });
-
-document.querySelector('.visibility-toggle').addEventListener('click', (event) => {
-  const button = event.currentTarget;
-  const balance = document.querySelector('.balance-amount');
-  const hidden = button.dataset.hidden === 'true';
-  balance.textContent = hidden ? balance.dataset.balance : '₱ ••••••';
-  button.dataset.hidden = String(!hidden);
-  button.setAttribute('aria-label', hidden ? 'Hide balance' : 'Show balance');
-});
-
-document.querySelector('[data-confirm]').addEventListener('click', () => {
-  const button = document.querySelector('[data-confirm]');
-  button.textContent = 'Ready to go ✓';
-  button.style.background = '#008b58';
-  setTimeout(() => { backdrop.hidden = true; button.innerHTML = 'Continue <span>→</span>'; button.style.background = ''; }, 900);
-});
+document.querySelector('#reference-number').textContent = Math.floor(100000 + Math.random() * 900000);
