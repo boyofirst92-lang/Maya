@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maya Login</title>
-    <meta name="description" content="Maya login page" />
+    <title>Maya Philippines | Personal Loan</title>
+    <meta name="description" content="Apply for a Maya personal loan in the Philippines." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -13,52 +13,82 @@
   <body>
     <div class="phone-shell">
       <header class="status-bar" aria-label="Status bar">
-        <div class="time">1:19 PM</div>
-        <div class="status-icons" aria-hidden="true">
-          <span class="signal signal-1"></span>
-          <span class="signal signal-2"></span>
-          <span class="signal signal-3"></span>
-          <span class="signal signal-4"></span>
-          <span class="wifi"></span>
-          <span class="battery"><span class="battery-level"></span></span>
-          <span class="battery-number">15.5</span>
-        </div>
+        <span class="time">1:19 PM</span>
+        <span class="status-copy">● ◒ ▰</span>
       </header>
 
       <nav class="top-nav" aria-label="Main navigation">
-        <button class="nav-back" type="button" aria-label="Go back">←</button>
-        <button class="nav-help" type="button" aria-label="Help">
-          <span class="help-mark">?</span>
-          <span>help</span>
-        </button>
+        <button class="nav-back" type="button" aria-label="Go back" data-back="previous">←</button>
+        <button class="nav-help" type="button" aria-label="Help"><span class="help-mark">?</span> Help</button>
       </nav>
 
-      <main class="login-screen">
-        <div class="brand" aria-label="Maya">maya</div>
+      <div class="brand" aria-label="Maya">maya</div>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill"></div></div><span data-step-count>Welcome</span></div>
 
-        <div class="login-form" role="form" aria-label="Login form">
-          <div class="field-group phone-field">
-            <span class="country-code">+63</span>
-            <input type="tel" inputmode="numeric" placeholder="Phone number" aria-label="Phone number" />
+      <main class="content">
+        <section class="step login-step" data-step="login">
+          <p class="eyebrow">Welcome back</p>
+          <h1>Log in to Maya</h1>
+          <form class="login-form" data-login-form novalidate>
+            <div class="field-group phone-field"><span class="country-code">+63</span><input id="login-phone" type="tel" inputmode="numeric" placeholder="Phone number" aria-label="Phone number" required /></div>
+            <div class="field-group password-field"><label for="password">Password</label><div class="password-wrap"><input id="password" type="password" placeholder="Enter password" aria-label="Password" required /><button type="button" class="eye-button" aria-label="Show password">◉</button></div></div>
+            <a href="#" class="forgot-link">Forgot your password?</a>
+            <button class="primary-button" type="submit">Log in</button>
+          </form>
+        </section>
+
+        <section class="step" data-step="welcome" hidden>
+          <p class="eyebrow">Maya Philippines</p>
+          <h1>Get the funds you need.</h1>
+          <p class="lead">Apply for a Maya Personal Loan and manage your application securely in one place.</p>
+          <div class="info-card"><strong>Fast, simple, and secure</strong><span>Borrow up to ₱500,000 with flexible payment terms of up to 60 months.</span></div>
+          <button class="primary-button" type="button" data-next="loan">Start loan application</button>
+        </section>
+
+        <section class="step" data-step="loan" hidden>
+          <p class="eyebrow">Personal Loan</p>
+          <h1>Choose your loan</h1>
+          <p class="lead">Set your preferred amount and payment period.</p>
+          <div class="loan-card">
+            <div class="value-row"><span>Loan amount</span><strong id="amount-value">₱50,000</strong></div>
+            <input id="loan-amount" class="range" type="range" min="10000" max="500000" step="5000" value="50000" aria-label="Loan amount" />
+            <div class="range-labels"><span>₱10,000</span><span>₱500,000</span></div>
+            <div class="value-row term-row"><span>Payment period</span><strong><span id="term-value">12</span> months</strong></div>
+            <input id="loan-term" class="range" type="range" min="3" max="60" step="1" value="12" aria-label="Payment period in months" />
+            <div class="range-labels"><span>3 months</span><span>60 months</span></div>
+            <div class="estimate"><span>Interest rate</span><strong>5% per year</strong><span>Estimated monthly payment</span><strong id="monthly-payment">₱4,375.00</strong></div>
           </div>
+          <button class="primary-button" type="button" data-next="details">Continue</button>
+        </section>
 
-          <div class="field-group password-field">
-            <label for="password">Password</label>
-            <div class="password-wrap">
-              <input id="password" type="password" placeholder="Enter password" aria-label="Password" />
-              <button type="button" class="eye-button" aria-label="Show password">
-                <span class="eye-icon" aria-hidden="true">
-                  <span class="eye-lid"></span>
-                </span>
-              </button>
-            </div>
-          </div>
+        <section class="step" data-step="details" hidden>
+          <p class="eyebrow">About you</p><h1>Tell us about yourself</h1><p class="lead">All fields are required to continue your application.</p>
+          <form class="details-form" novalidate>
+            <label>First name<input id="first-name" type="text" autocomplete="given-name" required /></label>
+            <label>Last name<input id="last-name" type="text" autocomplete="family-name" required /></label>
+            <label>Date of birth<input id="birth-date" type="date" required /></label>
+            <label>Loan purpose<select id="loan-purpose" required><option value="">Select a purpose</option><option>Education</option><option>Medical expenses</option><option>Home improvement</option><option>Business needs</option><option>Personal expenses</option><option>Debt consolidation</option></select></label>
+            <label>Monthly income<input id="monthly-income" type="number" min="1" inputmode="decimal" placeholder="₱ Monthly income" required /></label>
+            <p class="form-error" data-form-error role="alert"></p>
+            <button class="primary-button" type="submit">Continue</button>
+          </form>
+        </section>
 
-          <a href="#" class="forgot-link">Forgot your password?</a>
-        </div>
+        <section class="step" data-step="phone" hidden>
+          <p class="eyebrow">Verify your mobile number</p><h1>Where should we send your OTP?</h1><p class="lead">We’ll send a one-time PIN to your registered Philippine mobile number.</p>
+          <form class="details-form" data-phone-form novalidate><label>Mobile number<div class="phone-input"><span>+63</span><input id="mobile-number" type="tel" inputmode="numeric" placeholder="9XXXXXXXXX" required /></div></label><p class="form-error" data-phone-error role="alert"></p><button class="primary-button" type="submit">Send OTP</button></form>
+        </section>
 
-        <button class="login-button" type="submit">Log in</button>
+        <section class="step" data-step="otp" hidden>
+          <p class="eyebrow">Secure verification</p><h1>Enter your OTP</h1><p class="lead">Enter the 6-digit one-time PIN sent to your mobile number.</p>
+          <form class="otp-form" novalidate><div class="otp-fields">${Array.from({length:6},(_,i)=>`<input aria-label="OTP digit ${i+1}" inputmode="numeric" maxlength="1" required />`).join('')}</div><p class="form-error" data-otp-error role="alert"></p><button class="text-button" type="button" data-resend>Resend OTP</button><button class="primary-button" type="submit">Verify and submit</button></form>
+        </section>
+
+        <section class="step success-step" data-step="success" hidden>
+          <div class="success-icon">✓</div><p class="eyebrow">Application received</p><h1>Your loan application is on its way.</h1><p class="lead">Thank you for applying with Maya Philippines. We’ll review your details and notify you of the result.</p><div class="info-card"><span>Application reference</span><strong id="reference-number"></strong><small>Keep this reference for your records.</small></div><p class="copyright">© 2026 Maya Philippines. All rights reserved.</p>
+        </section>
       </main>
     </div>
+    <script src="app.js"></script>
   </body>
 </html>
